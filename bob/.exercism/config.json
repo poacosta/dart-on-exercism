@@ -1,0 +1,24 @@
+{
+  "blurb": "Bob is a lackadaisical teenager. In conversation, his responses are very limited.",
+  "authors": [
+    "SuperPaintman"
+  ],
+  "contributors": [
+    "camuthig",
+    "kytrinyx",
+    "Stargator"
+  ],
+  "files": {
+    "solution": [
+      "lib/bob.dart"
+    ],
+    "test": [
+      "test/bob_test.dart"
+    ],
+    "example": [
+      ".meta/lib/example.dart"
+    ]
+  },
+  "source": "Inspired by the 'Deaf Grandma' exercise in Chris Pine's Learn to Program tutorial.",
+  "source_url": "https://pine.fm/LearnToProgram/?Chapter=06"
+}
