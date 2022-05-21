@@ -1,0 +1,21 @@
+{
+  "blurb": "Given a phrase, count the occurrences of each word in that phrase.",
+  "authors": [
+    "devkabiir"
+  ],
+  "contributors": [
+    "Stargator"
+  ],
+  "files": {
+    "solution": [
+      "lib/word_count.dart"
+    ],
+    "test": [
+      "test/word_count_test.dart"
+    ],
+    "example": [
+      ".meta/lib/example.dart"
+    ]
+  },
+  "source": "This is a classic toy problem, but we were reminded of it by seeing it in the Go Tour."
+}
