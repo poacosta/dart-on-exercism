@@ -106,3 +106,5 @@ doc/api/
 **/.idea/**
 **/.exercism/**
 **/.dart_tool/**
+.idea
+
