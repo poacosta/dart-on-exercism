@@ -1,9 +1,10 @@
 import 'package:forth/forth.dart';
 import 'package:test/test.dart';
 
-final throwsEmptyStack = throwsA(isA<Exception>().having((e) => e.toString(), 'message', 'Exception: Stack empty'));
-final throwsInvalidDefinition =
-    throwsA(isA<Exception>().having((e) => e.toString(), 'message', 'Exception: Invalid definition'));
+final throwsEmptyStack = throwsA(isA<Exception>()
+    .having((e) => e.toString(), 'message', 'Exception: Stack empty'));
+final throwsInvalidDefinition = throwsA(isA<Exception>()
+    .having((e) => e.toString(), 'message', 'Exception: Invalid definition'));
 
 void main() {
   group('Forth: parsing and numbers - ', parsingAndNumbers);
@@ -31,7 +32,7 @@ void parsingAndNumbers() {
     var forth = Forth();
     forth.evaluate('-1 -2 -3 -4 -5');
     expect(forth.stack, equals(<int>[-1, -2, -3, -4, -5]));
-  }, skip: true);
+  }, skip: false);
 }
 
 void addition() {
@@ -39,7 +40,7 @@ void addition() {
     var forth = Forth();
     forth.evaluate('1 2 +');
     expect(forth.stack, equals(<int>[3]));
-  }, skip: true);
+  }, skip: false);
 
   test('errors if there is nothing on the stack', () {
     var forth = Forth();
@@ -47,7 +48,7 @@ void addition() {
       () => forth.evaluate('+'),
       throwsEmptyStack,
     );
-  }, skip: true);
+  }, skip: false);
 
   test('errors if there is only one value on the stack', () {
     var forth = Forth();
@@ -55,7 +56,7 @@ void addition() {
       () => forth.evaluate('1 +'),
       throwsEmptyStack,
     );
-  }, skip: true);
+  }, skip: false);
 }
 
 void subtraction() {
@@ -63,7 +64,7 @@ void subtraction() {
     var forth = Forth();
     forth.evaluate('3 4 -');
     expect(forth.stack, equals(<int>[-1]));
-  }, skip: true);
+  }, skip: false);
 
   test('errors if there is nothing on the stack', () {
     var forth = Forth();
@@ -71,7 +72,7 @@ void subtraction() {
       () => forth.evaluate('-'),
       throwsEmptyStack,
     );
-  }, skip: true);
+  }, skip: false);
 
   test('errors if there is only one value on the stack', () {
     var forth = Forth();
@@ -79,7 +80,7 @@ void subtraction() {
       () => forth.evaluate('1 -'),
       throwsEmptyStack,
     );
-  }, skip: true);
+  }, skip: false);
 }
 
 void multiplication() {
@@ -87,7 +88,7 @@ void multiplication() {
     var forth = Forth();
     forth.evaluate('2 4 *');
     expect(forth.stack, equals(<int>[8]));
-  }, skip: true);
+  }, skip: false);
 
   test('errors if there is nothing on the stack', () {
     var forth = Forth();
@@ -95,7 +96,7 @@ void multiplication() {
       () => forth.evaluate('*'),
       throwsEmptyStack,
     );
-  }, skip: true);
+  }, skip: false);
 
   test('errors if there is only one value on the stack', () {
     var forth = Forth();
@@ -103,7 +104,7 @@ void multiplication() {
       () => forth.evaluate('1 *'),
       throwsEmptyStack,
     );
-  }, skip: true);
+  }, skip: false);
 }
 
 void division() {
@@ -111,21 +112,22 @@ void division() {
     var forth = Forth();
     forth.evaluate('12 3 /');
     expect(forth.stack, equals(<int>[4]));
-  }, skip: true);
+  }, skip: false);
 
   test('performs integer division', () {
     var forth = Forth();
     forth.evaluate('8 3 /');
     expect(forth.stack, equals(<int>[2]));
-  }, skip: true);
+  }, skip: false);
 
   test('errors if dividing by zero', () {
     var forth = Forth();
     expect(
       () => forth.evaluate('4 0 /'),
-      throwsA(isA<Exception>().having((e) => e.toString(), 'message', 'Exception: Division by zero')),
+      throwsA(isA<Exception>().having(
+          (e) => e.toString(), 'message', 'Exception: Division by zero')),
     );
-  }, skip: true);
+  }, skip: false);
 
   test('errors if there is nothing on the stack', () {
     var forth = Forth();
@@ -133,7 +135,7 @@ void division() {
       () => forth.evaluate('/'),
       throwsEmptyStack,
     );
-  }, skip: true);
+  }, skip: false);
 
   test('errors if there is only one value on the stack', () {
     var forth = Forth();
@@ -141,7 +143,7 @@ void division() {
       () => forth.evaluate('1 /'),
       throwsEmptyStack,
     );
-  }, skip: true);
+  }, skip: false);
 }
 
 void combinedArithmetic() {
@@ -149,13 +151,13 @@ void combinedArithmetic() {
     var forth = Forth();
     forth.evaluate('1 2 + 4 -');
     expect(forth.stack, equals(<int>[-1]));
-  }, skip: true);
+  }, skip: false);
 
   test('multiplication and division', () {
     var forth = Forth();
     forth.evaluate('2 4 * 3 /');
     expect(forth.stack, equals(<int>[2]));
-  }, skip: true);
+  }, skip: false);
 }
 
 void dup() {
@@ -163,13 +165,13 @@ void dup() {
     var forth = Forth();
     forth.evaluate('1 dup');
     expect(forth.stack, equals(<int>[1, 1]));
-  }, skip: true);
+  }, skip: false);
 
   test('copies the top value on the stack', () {
     var forth = Forth();
     forth.evaluate('1 2 dup');
     expect(forth.stack, equals(<int>[1, 2, 2]));
-  }, skip: true);
+  }, skip: false);
 
   test('errors if there is nothing on the stack', () {
     var forth = Forth();
@@ -177,7 +179,7 @@ void dup() {
       () => forth.evaluate('dup'),
       throwsEmptyStack,
     );
-  }, skip: true);
+  }, skip: false);
 }
 
 void drop() {
@@ -185,13 +187,13 @@ void drop() {
     var forth = Forth();
     forth.evaluate('1 drop');
     expect(forth.stack, equals(<int>[]));
-  }, skip: true);
+  }, skip: false);
 
   test('removes the top value on the stack if it is not the only one', () {
     var forth = Forth();
     forth.evaluate('1 2 drop');
     expect(forth.stack, equals(<int>[1]));
-  }, skip: true);
+  }, skip: false);
 
   test('errors if there is nothing on the stack', () {
     var forth = Forth();
@@ -199,7 +201,7 @@ void drop() {
       () => forth.evaluate('drop'),
       throwsEmptyStack,
     );
-  }, skip: true);
+  }, skip: false);
 }
 
 void swap() {
@@ -207,13 +209,14 @@ void swap() {
     var forth = Forth();
     forth.evaluate('1 2 swap');
     expect(forth.stack, equals(<int>[2, 1]));
-  }, skip: true);
+  }, skip: false);
 
-  test('swaps the top two values on the stack if they are not the only ones', () {
+  test('swaps the top two values on the stack if they are not the only ones',
+      () {
     var forth = Forth();
     forth.evaluate('1 2 3 swap');
     expect(forth.stack, equals(<int>[1, 3, 2]));
-  }, skip: true);
+  }, skip: false);
 
   test('errors if there is nothing on the stack', () {
     var forth = Forth();
@@ -221,7 +224,7 @@ void swap() {
       () => forth.evaluate('swap'),
       throwsEmptyStack,
     );
-  }, skip: true);
+  }, skip: false);
 
   test('errors if there is only one value on the stack', () {
     var forth = Forth();
@@ -229,7 +232,7 @@ void swap() {
       () => forth.evaluate('1 swap'),
       throwsEmptyStack,
     );
-  }, skip: true);
+  }, skip: false);
 }
 
 void over() {
@@ -237,13 +240,13 @@ void over() {
     var forth = Forth();
     forth.evaluate('1 2 over');
     expect(forth.stack, equals(<int>[1, 2, 1]));
-  }, skip: true);
+  }, skip: false);
 
   test('copies the second element if there are more than two', () {
     var forth = Forth();
     forth.evaluate('1 2 3 over');
     expect(forth.stack, equals(<int>[1, 2, 3, 2]));
-  }, skip: true);
+  }, skip: false);
 
   test('errors if there is nothing on the stack', () {
     var forth = Forth();
@@ -251,7 +254,7 @@ void over() {
       () => forth.evaluate('over'),
       throwsEmptyStack,
     );
-  }, skip: true);
+  }, skip: false);
 
   test('errors if there is only one value on the stack', () {
     var forth = Forth();
@@ -259,7 +262,7 @@ void over() {
       () => forth.evaluate('1 over'),
       throwsEmptyStack,
     );
-  }, skip: true);
+  }, skip: false);
 }
 
 void userDefinedWords() {
@@ -268,14 +271,14 @@ void userDefinedWords() {
     forth.evaluate(': dup-twice dup dup ;');
     forth.evaluate('1 dup-twice');
     expect(forth.stack, equals(<int>[1, 1, 1]));
-  }, skip: true);
+  }, skip: false);
 
   test('execute in the right order', () {
     var forth = Forth();
     forth.evaluate(': countup 1 2 3 ;');
     forth.evaluate('countup');
     expect(forth.stack, equals(<int>[1, 2, 3]));
-  }, skip: true);
+  }, skip: false);
 
   test('can override other user-defined words', () {
     var forth = Forth();
@@ -283,21 +286,21 @@ void userDefinedWords() {
     forth.evaluate(': foo dup dup ;');
     forth.evaluate('1 foo');
     expect(forth.stack, equals(<int>[1, 1, 1]));
-  }, skip: true);
+  }, skip: false);
 
   test('can override built-in words', () {
     var forth = Forth();
     forth.evaluate(': swap dup ;');
     forth.evaluate('1 swap');
     expect(forth.stack, equals(<int>[1, 1]));
-  }, skip: true);
+  }, skip: false);
 
   test('can override built-in operators', () {
     var forth = Forth();
     forth.evaluate(': + * ;');
     forth.evaluate('3 4 +');
     expect(forth.stack, equals(<int>[12]));
-  }, skip: true);
+  }, skip: false);
 
   test('can use different words with the same name', () {
     var forth = Forth();
@@ -306,7 +309,7 @@ void userDefinedWords() {
     forth.evaluate(': foo 6 ;');
     forth.evaluate('bar foo');
     expect(forth.stack, equals(<int>[5, 6]));
-  }, skip: true);
+  }, skip: false);
 
   test('can define word that uses word with the same name', () {
     var forth = Forth();
@@ -314,7 +317,7 @@ void userDefinedWords() {
     forth.evaluate(': foo foo 1 + ;');
     forth.evaluate('foo');
     expect(forth.stack, equals(<int>[11]));
-  }, skip: true);
+  }, skip: false);
 
   test('cannot redefine non-negative numbers', () {
     var forth = Forth();
@@ -322,7 +325,7 @@ void userDefinedWords() {
       () => forth.evaluate(': 1 2 ;'),
       throwsInvalidDefinition,
     );
-  }, skip: true);
+  }, skip: false);
 
   test('cannot redefine negative numbers', () {
     var forth = Forth();
@@ -330,15 +333,16 @@ void userDefinedWords() {
       () => forth.evaluate(': -1 2 ;'),
       throwsInvalidDefinition,
     );
-  }, skip: true);
+  }, skip: false);
 
   test('errors if executing a non-existent word', () {
     var forth = Forth();
     expect(
       () => forth.evaluate('foo'),
-      throwsA(isA<Exception>().having((e) => e.toString(), 'message', 'Exception: Unknown command')),
+      throwsA(isA<Exception>().having(
+          (e) => e.toString(), 'message', 'Exception: Unknown command')),
     );
-  }, skip: true);
+  }, skip: false);
 
   test('only defines locally', () {
     var first = Forth();
@@ -352,7 +356,7 @@ void userDefinedWords() {
           <int>[0],
           <int>[2]
         ]));
-  }, skip: true);
+  }, skip: false);
 }
 
 void caseInsensitivity() {
@@ -360,37 +364,37 @@ void caseInsensitivity() {
     var forth = Forth();
     forth.evaluate('1 DUP Dup dup');
     expect(forth.stack, equals(<int>[1, 1, 1, 1]));
-  }, skip: true);
+  }, skip: false);
 
   test('DROP is case-insensitive', () {
     var forth = Forth();
     forth.evaluate('1 2 3 4 DROP Drop drop');
     expect(forth.stack, equals(<int>[1]));
-  }, skip: true);
+  }, skip: false);
 
   test('SWAP is case-insensitive', () {
     var forth = Forth();
     forth.evaluate('1 2 SWAP 3 Swap 4 swap');
     expect(forth.stack, equals(<int>[2, 3, 4, 1]));
-  }, skip: true);
+  }, skip: false);
 
   test('OVER is case-insensitive', () {
     var forth = Forth();
     forth.evaluate('1 2 OVER Over over');
     expect(forth.stack, equals(<int>[1, 2, 1, 2, 1]));
-  }, skip: true);
+  }, skip: false);
 
   test('user-defined words are case-insensitive', () {
     var forth = Forth();
     forth.evaluate(': foo dup ;');
     forth.evaluate('1 FOO Foo foo');
     expect(forth.stack, equals(<int>[1, 1, 1, 1]));
-  }, skip: true);
+  }, skip: false);
 
   test('definitions are case-insensitive', () {
     var forth = Forth();
     forth.evaluate(': SWAP DUP Dup dup ;');
     forth.evaluate('1 swap');
     expect(forth.stack, equals(<int>[1, 1, 1, 1]));
-  }, skip: true);
+  }, skip: false);
 }
