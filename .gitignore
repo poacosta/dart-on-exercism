@@ -107,4 +107,6 @@ doc/api/
 **/.exercism/**
 **/.dart_tool/**
 .idea
+.DS_Store
+**/.DS_Store
 
