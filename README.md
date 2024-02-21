@@ -4,7 +4,7 @@
 
 **This repo contains my progress in the [Dart track](https://exercism.org/tracks/dart) on [Exercism](https://exercism.org/).**
 
-**I strongly encourage everyone to find their solutions. However, if you're just learning and need a hint, this might help.**
+**I strongly encourage everyone to find their own solutions. However, if you're just learning and need a hint, this might help.**
 
 By the way, Exercism frequently updates its exercises. These solutions cover the tests you might find in the folders for this project.
 
